@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  db:
+    build: db/.
+    container_name: rocket
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: Undercity73!
+
+  www:
+    build: www/.
+    container_name: groot
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - ./www:/cmtrainer
